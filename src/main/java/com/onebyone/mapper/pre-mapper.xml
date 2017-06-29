@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright © 2017. Chengfu.Tang All rights reserved
+  -->
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onebyone.mapper.PreMapper">
+    <resultMap id="Out_Data_Map" type="java.util.HashMap">
+        <id property="manId" column="p1" javaType="String" jdbcType="VARCHAR"/>
+        <result property="manNo" column="p2" javaType="String" jdbcType="VARCHAR"/>
+        <result property="name" column="p3" javaType="String" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="preAppMan" parameterType="java.util.HashMap" statementType="CALLABLE">
+        call pre_app_man(
+        #{sJkNo,mode=IN},
+        #{sMan_id,mode=IN},
+        #{sParam1,mode=IN,jdbcType=VARCHAR},
+        #{sParam2,mode=IN,jdbcType=VARCHAR},
+        #{sOk,mode=OUT,jdbcType=VARCHAR},
+        #{Out_Data,mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=Out_Data_Map}
+        )
+    </select>
+</mapper>
